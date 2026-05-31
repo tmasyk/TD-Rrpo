@@ -1,0 +1,32 @@
+; Engine configuration file.
+; Godot 4 project — ASCENT (maze tower-defense roguelike)
+; Generated as part of the M0 scaffold. Open this folder in Godot 4 to edit/run.
+
+config_version=5
+
+[application]
+
+config/name="ASCENT"
+config/description="A maze tower-defense roguelike. Climb an endless tower; build the maze yourself."
+run/main_scene="res://scenes/main/main.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://scripts/autoload/event_bus.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+RunManager="*res://scripts/autoload/run_manager.gd"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation="portrait"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/canvas_textures/default_texture_filter=0

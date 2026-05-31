@@ -1,0 +1,13 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#1b1d2a"/>
+  <!-- tower -->
+  <rect x="48" y="20" width="32" height="88" fill="#4a5680"/>
+  <rect x="44" y="14" width="40" height="10" fill="#6c7bb0"/>
+  <!-- floors -->
+  <rect x="52" y="34" width="24" height="6" fill="#aab4e0"/>
+  <rect x="52" y="50" width="24" height="6" fill="#aab4e0"/>
+  <rect x="52" y="66" width="24" height="6" fill="#aab4e0"/>
+  <rect x="52" y="82" width="24" height="6" fill="#aab4e0"/>
+  <!-- maze path -->
+  <path d="M16 108 H40 V96 H28 V84 H40" stroke="#5fd3a3" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>
