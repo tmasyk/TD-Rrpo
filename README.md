@@ -43,6 +43,24 @@ Controls in the scaffold: **Left click** place/remove a test tower · **N** next
 floor · **R** restart run. Watch the **Output** panel for the generated
 `FloorSpec` and a sample `WaveDirector` composition.
 
+## Verifying headless (no GUI needed)
+
+The procedural systems and the full combat loop can be checked without opening
+the editor — useful for CI and for environments without a display:
+
+```bash
+# Compile every script + import resources (surfaces parse errors):
+godot --headless --path . --import
+
+# Logic smoke test: floor generation, maze-seal rejection, wave composition:
+godot --headless --path . --script tests/logic_smoke.gd
+
+# Integration drive: loads the real scene, builds towers, runs a full wave:
+godot --headless --path . res://tests/wave_drive.tscn
+```
+
+Each exits non-zero on failure.
+
 ## What's next (see the roadmap in the design doc)
 
 M1 playable slice → M2 run loop → M3 adaptive difficulty → M4 town meta →

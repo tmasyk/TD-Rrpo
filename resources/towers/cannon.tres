@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3 uid="uid://ccannontower01"]
+
+[ext_resource type="Script" path="res://scripts/data/tower_data.gd" id="1_towerdata"]
+
+[resource]
+script = ExtResource("1_towerdata")
+id = &"cannon"
+display_name = "Cannon"
+description = "Slow-firing splash damage. Strong against swarms, weak vs single fast targets."
+build_cost = 90
+sell_value = 45
+damage = 14.0
+attack_range = 2.4
+fire_rate = 0.6
+splash_radius = 1.2
+slow_factor = 0.0
+slow_duration = 0.0
+armor_pierce = 1
+can_target_flying = false

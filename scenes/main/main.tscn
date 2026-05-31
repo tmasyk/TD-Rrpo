@@ -5,11 +5,49 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
 
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Label" parent="CanvasLayer"]
 offset_left = 24.0
-offset_top = 20.0
+offset_top = 16.0
 offset_right = 696.0
-offset_bottom = 110.0
-text = "ASCENT — scaffold demo"
+offset_bottom = 150.0
+text = "ASCENT"
+
+[node name="Toast" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 600.0
+offset_right = 696.0
+offset_bottom = 660.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartWave" type="Button" parent="CanvasLayer"]
+offset_left = 260.0
+offset_top = 1190.0
+offset_right = 460.0
+offset_bottom = 1250.0
+text = "Start Wave"
+
+[node name="ArrowBtn" type="Button" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 1190.0
+offset_right = 244.0
+offset_bottom = 1250.0
+toggle_mode = true
+button_pressed = true
+text = "Arrow (50)"
+
+[node name="CannonBtn" type="Button" parent="CanvasLayer"]
+offset_left = 476.0
+offset_top = 1190.0
+offset_right = 696.0
+offset_bottom = 1250.0
+toggle_mode = true
+text = "Cannon (90)"

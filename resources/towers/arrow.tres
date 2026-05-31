@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TowerData" load_steps=2 format=3 uid="uid://carrowtower01"]
+
+[ext_resource type="Script" path="res://scripts/data/tower_data.gd" id="1_towerdata"]
+
+[resource]
+script = ExtResource("1_towerdata")
+id = &"arrow"
+display_name = "Arrow Tower"
+description = "Cheap single-target damage with long range."
+build_cost = 50
+sell_value = 25
+damage = 8.0
+attack_range = 3.0
+fire_rate = 1.4
+splash_radius = 0.0
+slow_factor = 0.0
+slow_duration = 0.0
+armor_pierce = 0
+can_target_flying = true

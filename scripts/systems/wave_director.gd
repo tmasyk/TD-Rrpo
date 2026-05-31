@@ -83,7 +83,7 @@ func compose_wave(floor_number: int, wave_index: int, perf: Dictionary) -> WaveS
 
 	for fam in chosen:
 		var unit_cost := _unit_cost(fam, floor_number)
-		var count := max(1, int(per_family_budget / unit_cost))
+		var count: int = max(1, int(per_family_budget / unit_cost))
 		spec.spawns.append(_make_entry(fam, count, floor_number))
 
 	spec.spawn_interval = clampf(0.7 - floor_number * 0.01, 0.25, 0.7)
