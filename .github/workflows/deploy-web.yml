@@ -1,0 +1,84 @@
+name: Deploy Web Build to Pages
+
+# Builds the Godot web (HTML5) export and publishes it to GitHub Pages so the
+# game is playable in a browser — including on a phone — with no install.
+#
+# One-time setup by the repo owner: GitHub repo -> Settings -> Pages ->
+# "Build and deployment" -> Source: "GitHub Actions".
+
+on:
+  push:
+    branches:
+      - claude/ai-tower-defense-game-I2J8p
+  workflow_dispatch:
+
+# Pin to the Godot version used during development.
+env:
+  GODOT_VERSION: "4.3"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment; let in-progress runs finish.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Godot ${{ env.GODOT_VERSION }} (headless) + export templates
+        run: |
+          set -euo pipefail
+          BASE="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+          curl -fL -o godot.zip "${BASE}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          curl -fL -o templates.tpz "${BASE}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          unzip -q godot.zip
+          mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" /usr/local/bin/godot
+          chmod +x /usr/local/bin/godot
+          mkdir -p extracted && (cd extracted && unzip -q ../templates.tpz)
+          TPL_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$TPL_DIR"
+          cp extracted/templates/* "$TPL_DIR/"
+          godot --headless --version
+
+      - name: Import project
+        # First headless open imports resources; it may exit non-zero on the
+        # initial import pass, so don't fail the build on it.
+        run: godot --headless --path . --import || true
+
+      - name: Run logic smoke test
+        run: godot --headless --path . --script tests/logic_smoke.gd
+
+      - name: Export Web build
+        run: |
+          set -euo pipefail
+          mkdir -p build/web
+          godot --headless --path . --export-release "Web" build/web/index.html
+          # Godot writes a status file named "export error.txt"; it is not an
+          # actual error. Remove it so it doesn't ship.
+          rm -f "build/web/export error.txt"
+          test -f build/web/index.html
+          test -f build/web/index.wasm
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

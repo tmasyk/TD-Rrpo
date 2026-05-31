@@ -17,3 +17,6 @@ mono_crash.*.json
 .DS_Store
 Thumbs.db
 *.swp
+
+# Web export output (built in CI)
+/build/
